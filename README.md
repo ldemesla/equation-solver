@@ -7,7 +7,7 @@ polynomial equation solver of degree 0 to 2.
 
 ## exemples
 
-![Image 1](screenshots/d0_eq.png)
-![Image 2](screenshots/d2_eq.png)
-![Image 3](screenshots/degre1_eq.png)
-![Image 4](screenshots/error_eq.png)
+![Image 1](images/image_1.png)
+![Image 2](images/image_2.png)
+![Image 3](images/image_3.png)
+![Image 4](images/image_4.png)
