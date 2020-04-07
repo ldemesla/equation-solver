@@ -21,6 +21,8 @@ def parse_equation(eq):
     for i in range(len(eq)):
         if (valid_sign(eq[i]) == False):
             return False
+        elif ((last == 'X' and eq[i] == ' ') or (eq[i] == 'X' and len(eq) == i + 1)):
+            polynomial = 1
         elif (last and last.isdigit() and last_s and eq[i].isdigit()):
             return False
         elif (last == '^' and eq[i].isdigit() == False):
@@ -217,27 +219,43 @@ def solve_sdegre_eq(eq):
         print((-float(eq[1])) / (2 * float(eq[2])))
     else:
         print('discriminant is stricly negative, there is two complexe solutions:')
+        if (float(eq[1]) != 0):
+            print('{} - '.format(-1 * float(eq[1])), end='')
+        else:
+            print('-', end='')
+        print('i√{} / {}'.format(str(-d), str((2*float(eq[2])))))
+        if (float(eq[1]) != 0):
+            print('{} + '.format(-1 * float(eq[1])), end='')
+        print('i√{} / {}'.format(str(-d), str((2*float(eq[2])))))
 
 def main(argv):
     if (len(argv) == 2):
         degre = parse_equation(argv[1])
-        if degre == False:
+        if degre is False:
             print('error: incorrect equation')
             return
         else:
             if (degre > 2):
                 print('error: this program only solve polynomial with a coefficient inferior to 3')
                 return
-            elif degre == 0:
-                print('A FAIREEEEE')
             else:
                 eq = equation_to_array(argv[1])
                 eq = sort_polynomial(eq)
-                print_reduced_form(eq) 
-                if degre == 1:
-                    solve_fdegre_eq(eq)
+                all_real = True
+                for i in range(len(eq)):
+                    if (eq[i] != '0'):
+                        all_real = False
+                if (all_real == True):
+                    print('There is an infinite number of solutions')
+                    return
+                elif degre == 0:
+                    print('There is no solutions to this equation')
                 else:
-                    solve_sdegre_eq(eq)
+                    print_reduced_form(eq)
+                    if degre == 1:
+                        solve_fdegre_eq(eq)
+                    else:
+                        solve_sdegre_eq(eq)
     else:
         print("Wrong number of arguments")
 
