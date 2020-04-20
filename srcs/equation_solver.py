@@ -191,6 +191,8 @@ def print_reduced_form(eq):
     x = ['X', 'X^2']
     print('reduced form : ', end='')
     for i in range(len(eq)):
+        if (eq[i][0] == '0'):
+            continue 
         if i == 0 and eq[i][0] == '-':
             print('-', end='')
         elif eq[i][0] == '-' and i != 0:
