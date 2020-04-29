@@ -1,5 +1,4 @@
 import sys
-import math
 
 def valid_sign(sign):
     valid_signs = ['+', '*', '-', '=', ' ', '^', '.', 'X']
@@ -211,8 +210,8 @@ def solve_sdegre_eq(eq):
     print('polynomial degree: 2')
     d = (float(eq[1])       ** 2) - (4*float(eq[2])*float(eq[0]))
     if (d > 0):
-        a = (-float(eq[1]) + math.sqrt(d)) / (2 * float(eq[2]))
-        b = (-float(eq[1]) - math.sqrt(d)) / (2 * float(eq[2]))
+        a = (-float(eq[1]) + (d ** 0.5)) / (2 * float(eq[2]))
+        b = (-float(eq[1]) - (d ** 0.5)) / (2 * float(eq[2]))
         print('discriminant is stricly positive, the two solutions are:')
         print(a)
         print(b)
@@ -250,11 +249,11 @@ def main(argv):
                 if (all_real == True):
                     print('There is an infinite number of solutions')
                     return
-                elif degre == 0:
+                elif degre == 0 or eq[1] == '0' and eq[2] == '0':
                     print('There is no solutions to this equation')
                 else:
                     print_reduced_form(eq)
-                    if degre == 1:
+                    if degre == 1 or eq[2] == '0':
                         solve_fdegre_eq(eq)
                     else:
                         solve_sdegre_eq(eq)
