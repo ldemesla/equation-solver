@@ -148,10 +148,10 @@ def sort_polynomial(eq):
                 del new_eq[j]
             else:
                 s = float(remove_x(eq[i]))
-                if (s > 0):
-                    new_eq.append('+' + str_int_float(s))
-                else:
-                    new_eq.append(str_int_float(s))
+            if (s > 0):
+                new_eq.append('+' + str_int_float(s))
+            else:
+                new_eq.append(str_int_float(s))
     for i in range(len(eq)):
         index = eq[i].find('X')
         if index != -1 and len(eq[i]) > index + 2 and eq[i][index + 2] == '1':
@@ -196,10 +196,13 @@ def print_reduced_form(eq):
             print('-', end='')
         elif eq[i][0] == '-' and i != 0:
             print(' - ', end='')
-        elif i != 0:
+        elif i != 0 and eq[i - 1][0] != '0':
             print(' + ', end='')
         if (len(eq[i]) != 2 or eq[i][1] != '1' or i == 0):
-            print(eq[i][1:], end='')
+            if (i == 0 and eq[0][0] != '-' and eq[0][0] != "+"):
+                print(eq[i], end='')
+            else:
+                print(eq[i][1:], end='')
             if i != 0:
                 print(' * ', end='')
         if i != 0:
@@ -249,7 +252,7 @@ def main(argv):
                 if (all_real == True):
                     print('There is an infinite number of solutions')
                     return
-                elif degre == 0 or eq[1] == '0' and eq[2] == '0':
+                elif degre == 0 or (len(eq) > 2 and eq[1] == '0' and eq[2] == '0') or ((len(eq) > 1 and eq[1] == '0')):
                     print('There is no solutions to this equation')
                 else:
                     print_reduced_form(eq)
