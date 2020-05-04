@@ -20,7 +20,7 @@ def parse_equation(eq):
     for i in range(len(eq)):
         if (valid_sign(eq[i]) == False):
             return False
-        elif ((last == 'X' and eq[i] == ' ') or (eq[i] == 'X' and len(eq) == i + 1)):
+        elif (((last == 'X' and eq[i] == ' ') or (eq[i] == 'X' and len(eq) == i + 1)) and polynomial < 1):
             polynomial = 1
         elif (last and last.isdigit() and last_s and eq[i].isdigit()):
             return False
@@ -252,7 +252,7 @@ def main(argv):
                 if (all_real == True):
                     print('There is an infinite number of solutions')
                     return
-                elif degre == 0 or (len(eq) > 2 and eq[1] == '0' and eq[2] == '0') or ((len(eq) > 1 and eq[1] == '0')):
+                elif degre == 0 or (len(eq) > 2 and eq[1] == '0' and eq[2] == '0') or ((len(eq) == 2 and eq[1] == '0')):
                     print('There is no solutions to this equation')
                 else:
                     print_reduced_form(eq)
