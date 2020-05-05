@@ -196,7 +196,7 @@ def print_reduced_form(eq):
             print('-', end='')
         elif eq[i][0] == '-' and i != 0:
             print(' - ', end='')
-        elif i != 0 and eq[i - 1][0] != '0':
+        elif (i == 1 and eq[i - 1][0] != '0') or (i == 2 and (eq[1][0] != '0' or eq[0][0] != '0')):
             print(' + ', end='')
         if (len(eq[i]) != 2 or eq[i][1] != '1' or i == 0):
             if (i == 0 and eq[0][0] != '-' and eq[0][0] != "+"):
